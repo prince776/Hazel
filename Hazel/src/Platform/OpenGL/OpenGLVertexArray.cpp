@@ -27,6 +27,7 @@ namespace Hazel {
 	}
 
 	OpenGLVertexArray::OpenGLVertexArray()
+		: m_VertexBufferIndexOffset(0)
 	{
 		glCreateVertexArrays(1, &m_RendererID);
 	}
@@ -57,8 +58,8 @@ namespace Hazel {
 		const auto& layout = vertexBuffer->GetLayout();
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index,
+			glEnableVertexAttribArray(index + m_VertexBufferIndexOffset);
+			glVertexAttribPointer(index + m_VertexBufferIndexOffset,
 				element.GetComponentCount(),
 				ShaderDataTypeToOpenGLBaseType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
@@ -68,6 +69,7 @@ namespace Hazel {
 		}
 
 		m_VertexBuffers.push_back(vertexBuffer);
+		m_VertexBufferIndexOffset += (uint32_t)layout.GetElements().size();
 	}
 
 	void OpenGLVertexArray::SetIndexBuffer(const Hazel::Ref<IndexBuffer>& indexBuffer)
