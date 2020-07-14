@@ -19,11 +19,4 @@ private:
 
 	Hazel::Ref<Hazel::Texture2D> m_CheckerboardTexture;
 
-	struct ProfileResult
-	{
-		const char* Name;
-		float Time;
-	};
-
-	std::vector<ProfileResult> m_ProfileResults;
 };

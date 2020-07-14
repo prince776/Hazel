@@ -10,13 +10,18 @@ int main(int argc, char** argv)
 {
 	Hazel::Log::Init();
 	
-	HZ_CORE_WARN("Intialized log!");
-	int a = 5;
-	HZ_CORE_INFO("Var a = {0}", a);
 
+	HZ_PROFILE_BEGIN_SESSION("Startup", "HazelProfile-Startup.json");
 	auto app = Hazel::CreateApplication();
+	HZ_PROFILE_END_SESSION();
+
+	HZ_PROFILE_BEGIN_SESSION("Runtime", "HazelProfile-Runtime.json");
 	app->Run();
+	HZ_PROFILE_END_SESSION();
+
+	HZ_PROFILE_BEGIN_SESSION("Startup", "HazelProfile-Shutdown.json");
 	delete app;
+	HZ_PROFILE_END_SESSION();
 }
 
 #else
