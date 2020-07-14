@@ -4,8 +4,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Platform/OpenGL/OpenGLShader.h"
-
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true)
 {
@@ -37,9 +35,6 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 
 void Sandbox2D::OnImGuiRender()
 {
-	ImGui::Begin("Settings");
-	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
-	ImGui::End();
 }
 
 void Sandbox2D::OnEvent(Hazel::Event& e)
