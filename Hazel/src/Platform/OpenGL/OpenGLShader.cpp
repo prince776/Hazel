@@ -56,7 +56,7 @@ namespace Hazel {
 		{
 			in.seekg(0, std::ios::end);
 			size_t size = in.tellg();
-			if (size != -1)
+			if (size != -1) 
 			{
 				result.resize(size);
 				in.seekg(0, std::ios::beg);
