@@ -7,7 +7,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace Hazel { 
+namespace Hazel {
 
 	struct Renderer2DStorage
 	{
