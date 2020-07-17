@@ -13,6 +13,11 @@ void Sandbox2D::OnAttach()
 {
 	m_CheckerboardTexture = Hazel::Texture2D::Create("assets/textures/Checkerboard.png");
 	Hazel::Application::Get().GetWindow().SetVSync(false);
+
+	Hazel::FramebufferSpecification fbSpec;
+	fbSpec.Width = 1280;
+	fbSpec.Height = 720;
+	m_Framebuffer = Hazel::Framebuffer::Create(fbSpec);
 }
 
 void Sandbox2D::OnDetach()
@@ -36,6 +41,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 	Hazel::Renderer2D::ResetStats();
 	{
 		HZ_PROFILE_SCOPE("Renderer Prep");
+		m_Framebuffer->Bind();
 		Hazel::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Hazel::RenderCommand::Clear();
 	}
@@ -60,6 +66,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 			}
 		}
 		Hazel::Renderer2D::EndScene();
+		m_Framebuffer->Unbind();
 	}
 
 }
@@ -79,7 +86,7 @@ void Sandbox2D::OnImGuiRender()
 
 	ImGui::Text("FPS: %d", (int)(1000.0f / m_Timestep.GetMilliseconds()));
 
-	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+	uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 	ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
 
 	ImGui::End();
