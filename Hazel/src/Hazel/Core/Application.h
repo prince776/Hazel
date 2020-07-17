@@ -29,6 +29,8 @@ namespace Hazel {
 
 		void Close();
 
+		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
+
 		static Application& Get() { return *s_Instance; }
 		Window& GetWindow() { return *m_Window; }
 	private:
@@ -41,7 +43,7 @@ namespace Hazel {
 		bool m_Running = true;
 		bool m_Minimized = false;
 		LayerStack m_LayerStack;
-	
+		
 		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_Instance;
