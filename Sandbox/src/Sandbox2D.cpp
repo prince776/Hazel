@@ -79,6 +79,9 @@ void Sandbox2D::OnImGuiRender()
 
 	ImGui::Text("FPS: %d", (int)(1000.0f / m_Timestep.GetMilliseconds()));
 
+	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+	ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+
 	ImGui::End();
 }
 
