@@ -17,7 +17,6 @@ public:
 private:
 	Hazel::OrthographicCameraController m_CameraController;
 
-	Hazel::Ref<Hazel::Framebuffer> m_Framebuffer;
 	Hazel::Ref<Hazel::Texture2D> m_CheckerboardTexture;
 	Hazel::Timestep m_Timestep;
 };
